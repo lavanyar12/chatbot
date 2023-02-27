@@ -1,0 +1,59 @@
+[
+  {
+    "workflowId": "ID_START",
+    "content": "Hi! I have a great shift opportunity for you! Are you Interested in hearing about it?<br><br>Please respond Yes or No",
+    "next": [
+      {
+        "chatText": "yes",
+        "workflowId": "ID_YES"
+      },
+      {
+        "chatText": "no",
+        "workflowId": "ID_NO"
+      }
+    ]
+  },
+  {
+    "workflowId": "ID_YES",
+    "content": "Great! the shift is at 1313 Mockingbird Ln<br>at 2/15/2021 4:00pm-12:00am.<br><br>We'll see you there",
+    "next": []
+  },
+  {
+    "workflowId": "ID_NO",
+    "content": "Ok, thanks. Can you let me know why not?<br>Respond 1: Too far <br>Respond 2: Not available <br>Respond 3: Other",
+    "next": [
+      {
+        "chatText": "1",
+        "workflowId": "ID_ONE"
+      },
+      {
+        "chatText": "2",
+        "workflowId": "ID_TWO"
+      },
+      {
+        "chatText": "3",
+        "workflowId": "ID_THREE"
+      }
+    ]
+  },
+  {
+    "workflowId": "ID_ONE",
+    "content": "Thanks for letting me know. I'll avoid offering shifts at this location in the future",
+    "next": []
+  },
+  {
+    "workflowId": "ID_TWO",
+    "content": "Thanks for letting me know. I'll avoid offering shifts at this location in the future",
+    "next": []
+  },
+  {
+    "workflowId": "ID_THREE",
+    "content": "Ok. Thanks. I won't offer shifts at this location or time in the future.",
+    "next": []
+  },
+  {
+    "workflowId": "ID_INVALID",
+    "content": "I'm sorry, I didn't understand your response.",
+    "next": []
+  }
+]

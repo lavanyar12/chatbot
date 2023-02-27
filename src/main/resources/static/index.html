@@ -1,0 +1,50 @@
+<!DOCTYPE html>
+<html>
+<head>
+    <title>Hello WebSocket</title>
+    <link href="/webjars/bootstrap/css/bootstrap.min.css" rel="stylesheet">
+    <link href="/main.css" rel="stylesheet">
+    <script src="/webjars/jquery/jquery.min.js"></script>
+    <script src="/webjars/sockjs-client/sockjs.min.js"></script>
+    <script src="/webjars/stomp-websocket/stomp.min.js"></script>
+    <script src="/app.js"></script>
+</head>
+<body>
+<noscript><h2 style="color: #ff0000">Seems your browser doesn't support Javascript! Websocket relies on Javascript being
+    enabled. Please enable
+    Javascript and reload this page!</h2></noscript>
+<div class="container" id="main-content">
+    <div class="row">
+        <div class="col-md-6">
+            <form class="form-inline">
+                <div class="form-group">
+                    <label for="connect">Chat: </label>
+                    <button class="btn btn-default" id="connect" type="submit">Enter</button>
+                    <button class="btn btn-default" disabled="disabled" id="disconnect" type="submit">Exit
+                    </button>
+                </div>
+            </form>
+            </form>
+        </div>
+        <div class="col-md-6">
+            <form class="form-inline">
+                <div class="form-group">
+                    <input class="form-control" id="chat" placeholder="Enter your response" type="text">
+                    <button class="btn btn-default" id="send" type="submit">Send</button>
+                </div>
+                <!--                <input type="button" id="send" value="Submit">-->
+                <input id="workflowId" name="workflowId" type="hidden"/>
+            </form>
+        </div>
+    </div>
+    <div class="row">
+        <div class="col-md-12">
+            <table class="table table-striped" id="conversation">
+                <tbody id="botResponses">
+                </tbody>
+            </table>
+        </div>
+    </div>
+</div>
+</body>
+</html>
