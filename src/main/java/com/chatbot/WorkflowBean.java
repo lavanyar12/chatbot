@@ -1,14 +1,11 @@
-package com.chatbot.config;
+package com.chatbot;
 
-import com.chatbot.ChatbotApplication;
 import com.chatbot.model.Workflow;
 import com.fasterxml.jackson.core.type.TypeReference;
 import com.fasterxml.jackson.databind.ObjectMapper;
 import lombok.Data;
-import org.springframework.beans.BeansException;
 import org.springframework.beans.factory.annotation.Value;
-import org.springframework.context.ApplicationContext;
-import org.springframework.context.ApplicationContextAware;
+import org.springframework.context.annotation.Bean;
 import org.springframework.stereotype.Component;
 
 import java.io.BufferedReader;
@@ -20,24 +17,11 @@ import java.util.List;
 
 @Component
 @Data
-public class WorkflowBean implements ApplicationContextAware {
+public class WorkflowBean {
+    private List<Workflow> workflowList; //holds the workflows in memory
 
-    @Value("${chatbot.filename}")
-    private String filename;
-    private String applicationId;
-
-    private List<Workflow> workflowList;
-
-    @Override
-    public void setApplicationContext(ApplicationContext applicationContext)
-            throws BeansException {
-
-        applicationId = applicationContext.getId();
-        this.loadWorkflows();
-    }
-
-    // load data from the resources folder when app starts
-    private void loadWorkflows() {
+    @Bean
+    public List<Workflow> getWorkflows(@Value("${chatbot.filename}") String filename) {
 
         // The class loader that loaded the class
         ClassLoader classLoader = ChatbotApplication.class.getClassLoader();
@@ -62,6 +46,7 @@ public class WorkflowBean implements ApplicationContextAware {
             } catch (IOException e) {
                 e.printStackTrace();
             }
+            return this.workflowList;
         }
     }
 

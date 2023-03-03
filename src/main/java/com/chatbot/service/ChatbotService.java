@@ -1,11 +1,10 @@
 package com.chatbot.service;
 
-import com.chatbot.config.WorkflowBean;
+import com.chatbot.WorkflowBean;
 import com.chatbot.model.ChatbotMessage;
 import com.chatbot.model.IncomingMessage;
 import com.chatbot.model.Workflow;
 import org.springframework.beans.factory.annotation.Autowired;
-import org.springframework.context.ApplicationContext;
 import org.springframework.stereotype.Service;
 import org.springframework.util.CollectionUtils;
 
@@ -14,18 +13,14 @@ import org.springframework.util.CollectionUtils;
 public class ChatbotService {
 
     @Autowired
-    private ApplicationContext applicationContext;
+    private WorkflowBean workflowBean;
 
     private final String START = "ID_START";
     private final String INVALID = "ID_INVALID";
 
-    public ApplicationContext getApplicationContext() {
-        return this.applicationContext;
-    }
     public ChatbotMessage getChatbotMessage(IncomingMessage message) {
         ChatbotMessage response = new ChatbotMessage();
         String workflowId = message != null && message.getWorkflowId().isEmpty() ? START : message.getWorkflowId();
-        WorkflowBean workflowBean = applicationContext.getBean(WorkflowBean.class);
         for (Workflow w : workflowBean.getWorkflowList()) {
             if (w.getWorkflowId().equals(workflowId)) {
                 response.setContent(w.getContent());
@@ -64,6 +59,6 @@ public class ChatbotService {
     }
 
     private void log(IncomingMessage message, ChatbotMessage response) {
-        System.out.println(applicationContext.getId() + " - Chat : " + message.toString() + " Bot Message : " + response.toString());
+        System.out.println("Chat : " + message.toString() + " Bot Message : " + response.toString());
     }
 }

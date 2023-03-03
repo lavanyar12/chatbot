@@ -1,6 +1,6 @@
 package com.chatbot.service;
 
-import com.chatbot.config.WorkflowBean;
+import com.chatbot.WorkflowBean;
 import com.chatbot.model.ChatbotMessage;
 import com.chatbot.model.IncomingMessage;
 import com.chatbot.model.Workflow;
@@ -11,7 +11,6 @@ import org.junit.jupiter.api.TestInstance;
 import org.junit.runner.RunWith;
 import org.springframework.beans.factory.annotation.Autowired;
 import org.springframework.boot.test.context.SpringBootTest;
-import org.springframework.context.ApplicationContext;
 import org.springframework.test.context.junit4.SpringRunner;
 
 @RunWith(SpringRunner.class)
@@ -26,16 +25,13 @@ class ChatbotServiceTest {
 
     private final String CONTENT = "Hi! I have a great shift opportunity for you! Are you Interested in hearing about it?<br><br>Please respond Yes or No";
 
-    @Autowired
-    private ApplicationContext applicationContext;
-
     private IncomingMessage incomingMessage;
 
+    @Autowired
     private WorkflowBean workflowBean;
 
     @BeforeAll
     void setUp() {
-        workflowBean = this.applicationContext.getBean(WorkflowBean.class);
         incomingMessage = new IncomingMessage("", "");
     }
 
